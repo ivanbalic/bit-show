@@ -1,12 +1,33 @@
-header, footer {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+p{
+    margin: 0;
+}
+
+header {
+    color: white;
+    background-color: black;
+}
+
+footer {
     background-color: black;
     color: white;
+    text-align: center;
 }
 
 h1 {
     text-align: center;
 }
-
+.row {
+    display: flex;
+    justify-content: space-around;
+    align-content: space-around;
+}
 .card {
     width: 18rem;
+    margin: 20px 0; 
 }
