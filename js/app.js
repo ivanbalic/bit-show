@@ -6,11 +6,19 @@ const init = () => {
 
     console.log("App initialized");
     setUpEventListener();
-    data.fetchData(ui.displayShow);
+    data.fetchData(OnSuccessHandler);
 }
 
 function setUpEventListener() {
 
 }
+
+const OnSuccessHandler = (listOfShows) => {
+    for (let i = 0; i < 50; i++) {
+        const show = listOfShows[i];
+
+        ui.displayShow(show);
+    }
+};
 
 export { init };

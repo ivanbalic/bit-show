@@ -1,4 +1,4 @@
-const fetchData = (displayShows) => {
+const fetchData = (onSuccessHandler) => {
 
     const LIST_OF_SHOWS_ENDPOINT = "http://api.tvmaze.com/shows";
 
@@ -19,8 +19,8 @@ const fetchData = (displayShows) => {
             return 0;
         });
 
-        console.log(listOfShows);
-        displayShows(listOfShows);
+        onSuccessHandler(listOfShows);
+
     });
 
     request.fail(function (jqXHR, textStatus) {
