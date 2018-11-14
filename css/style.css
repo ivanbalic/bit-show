@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box; }
 
+body {
+  position: relative; }
+
 p {
   margin: 0; }
 
@@ -26,5 +29,12 @@ h1 {
 .card {
   width: 18rem;
   margin: 20px 0; }
+
+ul {
+  width: 200px;
+  position: absolute;
+  right: 64.5px;
+  top: 45px;
+  z-index: 1; }
 
 /*# sourceMappingURL=style.css.map */
