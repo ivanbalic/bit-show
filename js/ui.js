@@ -1,23 +1,23 @@
 const $gallery = $('.row');
 const $list = $('ul');
 const $searchInput = $('input');
+const $main = $('main');
 
 const getSearchValue = () => {
 
     return $searchInput.val();
-}
+};
 
 const displayShow = (show) => {
     const $cardDiv = $('<div>');
-    const cardHtml = `<img class="card-img-top" src=${show.image.medium} alt="Card image cap">
+    const cardHtml = `<img data-id="${show.id}" class="card-img-top" src=${show.image.medium} alt="Card image cap">
     <div class="card-body">
-    <p class="card-text">${show.name}</p>
+    <p data-id="${show.id}" class="card-text">${show.name}</p>
     </div>`
     $cardDiv.attr("class", "card");
-    $cardDiv.attr("data-id", `"${show.id}"`);
     $cardDiv.html(cardHtml);
     $gallery.append($cardDiv);
-}
+};
 
 
 const displaySearch = (listOfShows) => {
@@ -34,11 +34,51 @@ const displaySearch = (listOfShows) => {
         }
     }
     $list.html(listItemsHtml);
-}
+};
+
+const displayMoreInfo = show => {
+
+    const { title, seasons, casts, details, images } = show;
+    const { medium, original } = images;
+    const $container = $('<div>');
+    const $title = $('<h1>');
+    const $image = $('<img>');
+    const $seasonList = $('<ul>');
+    const $castList = $('<ul>');
+    const $details = $('<div>');
+
+    $container.attr('class', 'container');
+    $title.text(title);
+    $image.attr('src', original);
+    $seasonList.html(createListItems(seasons));
+    $castList.html(createListItems(casts));
+    $details.html(details);
+
+    $container.append($title);
+    $container.append($image);
+    $container.append($seasonList);
+    $container.append($castList);
+    $container.append($details);
+
+    $main.append($container);
+    console.log(show);
+
+};
+
+const createListItems = array => {
+    let listHtml = "";
+    for (let i = 0; i < array.length; i++) {
+        const element = array[i];
+
+        listHtml += `<li>${element.getInfo()}</li>`;
+    }
+    return listHtml;
+};
 
 
 export {
     displayShow,
     displaySearch,
-    getSearchValue
+    getSearchValue,
+    displayMoreInfo
 }

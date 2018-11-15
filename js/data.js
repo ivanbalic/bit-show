@@ -1,6 +1,11 @@
+import Cast from "./entities/Cast.js";
+import Season from "./entities/Season.js";
+import Show from "./entities/Show.js";
+
+
 const LIST_OF_SHOWS_ENDPOINT = "http://api.tvmaze.com/shows";
 
-const fetchData = (onSuccessHandler) => {
+const fetchHomePage = (onSuccessHandler) => {
 
     const request = $.ajax({
         url: LIST_OF_SHOWS_ENDPOINT,
@@ -49,7 +54,44 @@ const fetchSearchingData = (onSearchSuccess, searchInput) => {
 
 };
 
+const fetchMoreInfo = (moreInfoSuccess) => {
+
+    const id = localStorage.getItem('id');
+
+    const EMBED_ENDPOINT = `http://api.tvmaze.com/shows/${id}?embed[]=seasons&embed[]=cast`;
+
+    const request = $.ajax({
+        url: EMBED_ENDPOINT,
+        method: 'GET'
+    });
+
+    request.done(function (response) {
+
+        const { name, summary, image, _embedded } = response;
+
+        const { seasons, cast } = _embedded;
+
+        const show = new Show(name, summary, image);
+
+        const mappedCasts = cast.map(cast => new Cast(cast.person.name, cast.character.name));
+        const mappedSeasons = seasons.map(season => new Season(season.premiereDate, season.endDate));
+
+        show.seasons = mappedSeasons;
+        show.casts = mappedCasts;
+
+        moreInfoSuccess(show);
+
+        console.log(response);
+    });
+
+    request.fail(function (jqXHR, textStatus) {
+        alert("Request failed: " + textStatus);
+    });
+
+};
+
 export {
-    fetchData,
-    fetchSearchingData
+    fetchHomePage,
+    fetchSearchingData,
+    fetchMoreInfo
 }

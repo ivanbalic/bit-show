@@ -1,0 +1,25 @@
+@import "./partials/header";
+@import "./partials/footer";
+@import "./partials/search-list";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.card {
+    width: 18rem;
+    margin: 20px 0;
+}
+

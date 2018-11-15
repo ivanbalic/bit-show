@@ -1,0 +1,40 @@
+header {
+  color: white;
+  background-color: black; }
+
+footer {
+  background-color: black;
+  color: white;
+  text-align: center; }
+
+p {
+  margin: 0; }
+
+a:link {
+  display: block;
+  color: black;
+  text-transform: uppercase;
+  text-decoration: unset; }
+
+a:visited {
+  color: black; }
+
+a:hover {
+  color: slategray; }
+
+a:active {
+  color: slategray; }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+.container {
+  display: flex;
+  flex-direction: column; }
+
+img {
+  flex-grow: 1; }
+
+/*# sourceMappingURL=info.css.map */

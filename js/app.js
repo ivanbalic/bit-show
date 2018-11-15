@@ -2,27 +2,22 @@ import * as data from "./data.js";
 import * as ui from "./ui.js";
 
 
-const init = () => {
+const homePageInit = () => {
 
     console.log("App initialized");
-    data.fetchData(onSuccessHandler);
+    data.fetchHomePage(onSuccessHandler);
     setUpEventListener();
 }
 
-function setUpEventListener() {
+const moreInfoInit = () => {
+    data.fetchMoreInfo(moreInfoSuccess);
+}
 
-    const $allImages = $("img");
-    const $searchBtn = $("button");
+function setUpEventListener() {
     const $searchInput = $("input");
 
-    $allImages.on("click", function () {
-
-    });
-
-    $searchBtn.on("click", onSearchHandler);
-
     $searchInput.on("input", onSearchHandler);
-
+    console.log("Event listeners set");
 }
 
 const onSearchHandler = () => {
@@ -31,15 +26,32 @@ const onSearchHandler = () => {
 }
 
 const onSearchSuccess = (listOfShows) => {
-    console.log(listOfShows);
     ui.displaySearch(listOfShows);
+    const $allListItems = $("li");
+    $allListItems.on("click", onClickHandler);
 };
+
 const onSuccessHandler = (listOfShows) => {
     for (let i = 0; i < 50; i++) {
         const show = listOfShows[i];
 
         ui.displayShow(show);
     }
+    const $allCards = $(".card");
+    $allCards.on("click", onClickHandler);
 };
 
-export { init };
+const onClickHandler = (event) => {
+    localStorage.setItem('id', $(event.target).attr('data-id'));
+    window.location.href = "./getMoreInfo.html";
+};
+
+const moreInfoSuccess = (showInstance) => {
+    ui.displayMoreInfo(showInstance);
+};
+
+
+export {
+    homePageInit,
+    moreInfoInit
+};
