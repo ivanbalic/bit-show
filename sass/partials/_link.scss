@@ -1,19 +1,19 @@
-a:link {
-    display: block;
+.home:link {
+    display: inline-block;
     color: black;
     text-transform: uppercase;
     text-decoration: unset;
 }
 
-a:visited {
+.home:visited {
     color: black;
 }
 
-a:hover {
+.home:hover {
     color: slategray;
 }
 
 
-a:active {
+.home:active {
     color: slategray;
 }

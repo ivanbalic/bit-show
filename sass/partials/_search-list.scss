@@ -1,11 +1,15 @@
-ul {
-    width: 200px;
-    position: absolute;
-    right: 25px;
-    top: -10px;
+.search-dropdown{
+    position: relative;
+}
+
+.list-group {
+    width: 190px;
+    position: fixed;
+    right: 85px;
+    top: 45px;
     z-index: 1;
 }
 
-.search-dropdown{
-    position: relative;
+.list-group:hover {
+    cursor: pointer;
 }

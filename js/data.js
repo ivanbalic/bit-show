@@ -5,89 +5,119 @@ import Show from "./entities/Show.js";
 
 const LIST_OF_SHOWS_ENDPOINT = "http://api.tvmaze.com/shows";
 
-const fetchHomePage = (onSuccessHandler) => {
+const fetchHomePage = () => {
 
-    const request = $.ajax({
-        url: LIST_OF_SHOWS_ENDPOINT,
-        method: "GET"
-    });
+    const homePagePromise = fetch(LIST_OF_SHOWS_ENDPOINT)
+        .then(listOfShows => {
 
-    request.done(function (listOfShows) {
+            return listOfShows.json();
+        })
+        .then(parsedListOfShows => {
 
-        listOfShows.sort(function (a, b) {
-            if (a.rating.average < b.rating.average) {
-                return 1;
-            }
-            if (a.rating.average > b.rating.average) {
-                return -1;
-            }
-            return 0;
+            parsedListOfShows.sort(function (a, b) {
+                if (a.rating.average < b.rating.average) {
+                    return 1;
+                }
+                if (a.rating.average > b.rating.average) {
+                    return -1;
+                }
+                return 0;
+            });
+
+            const mappedShows = parsedListOfShows.map(show => {
+                const {
+                    name,
+                    summary,
+                    image,
+                    id
+                } = show;
+
+                return new Show(name, summary, image, id);
+            });
+
+            return mappedShows;
         });
 
-        onSuccessHandler(listOfShows);
-
-    });
-
-    request.fail(function (jqXHR, textStatus) {
-        alert("Request failed: " + textStatus);
-    });
+    return homePagePromise;
 }
 
-const fetchSearchingData = (onSearchSuccess, searchInput) => {
+const fetchSearchingData = (searchInput) => {
 
     const SEARCH_ENDPOINT = `http://api.tvmaze.com/search/shows?q=${searchInput}`;
 
-    const request = $.ajax({
-        url: SEARCH_ENDPOINT,
-        method: "GET"
-    });
+    const searchingDataPromise = fetch(SEARCH_ENDPOINT)
+        .then(listOfShows => {
 
-    request.done(function (listOfShows) {
+            return listOfShows.json();
+        })
+        .then(parsedListOfShows => {
 
-        onSearchSuccess(listOfShows);
+            parsedListOfShows.sort(function (a, b) {
+                if (a.show.rating.average < b.show.rating.average) {
+                    return 1;
+                }
+                if (a.show.rating.average > b.show.rating.average) {
+                    return -1;
+                }
+                return 0;
+            });
 
-    });
+            const mappedShows = parsedListOfShows.map(raw => {
+                const {
+                    show
+                } = raw;
+                const {
+                    name,
+                    summary,
+                    image,
+                    id
+                } = show;
 
-    request.fail(function (jqXHR, textStatus) {
-        alert("Request failed: " + textStatus);
-    });
+                return new Show(name, summary, image, id);
+            });
 
+            return mappedShows;
+        });
+
+    return searchingDataPromise;
 };
 
-const fetchMoreInfo = (moreInfoSuccess) => {
+const fetchMoreInfo = () => {
 
     const id = localStorage.getItem('id');
 
     const EMBED_ENDPOINT = `http://api.tvmaze.com/shows/${id}?embed[]=seasons&embed[]=cast`;
 
-    const request = $.ajax({
-        url: EMBED_ENDPOINT,
-        method: 'GET'
-    });
+    const moreInfoPromise = fetch(EMBED_ENDPOINT)
+        .then(response => {
+            return response.json();
+        })
+        .then( parsedResponse => {
 
-    request.done(function (response) {
+            const {
+                name,
+                summary,
+                image,
+                id,
+                _embedded
+            } = parsedResponse;
+            const {
+                seasons,
+                cast
+            } = _embedded;
+    
+            const show = new Show(name, summary, image, id);
+    
+            const mappedCasts = cast.map(cast => new Cast(cast.person.name, cast.character.name));
+            const mappedSeasons = seasons.map(season => new Season(season.premiereDate, season.endDate));
+    
+            show.seasons = mappedSeasons;
+            show.casts = mappedCasts;
 
-        const { name, summary, image, _embedded } = response;
+            return show;
+        });
 
-        const { seasons, cast } = _embedded;
-
-        const show = new Show(name, summary, image);
-
-        const mappedCasts = cast.map(cast => new Cast(cast.person.name, cast.character.name));
-        const mappedSeasons = seasons.map(season => new Season(season.premiereDate, season.endDate));
-
-        show.seasons = mappedSeasons;
-        show.casts = mappedCasts;
-
-        moreInfoSuccess(show);
-
-        console.log(response);
-    });
-
-    request.fail(function (jqXHR, textStatus) {
-        alert("Request failed: " + textStatus);
-    });
-
+        return moreInfoPromise;
 };
 
 export {

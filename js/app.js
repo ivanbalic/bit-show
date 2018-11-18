@@ -2,16 +2,6 @@ import * as data from "./data.js";
 import * as ui from "./ui.js";
 
 
-const homePageInit = () => {
-
-    console.log("App initialized");
-    data.fetchHomePage(onSuccessHandler);
-    setUpEventListener();
-}
-
-const moreInfoInit = () => {
-    data.fetchMoreInfo(moreInfoSuccess);
-}
 
 function setUpEventListener() {
     const $searchInput = $("input");
@@ -22,7 +12,11 @@ function setUpEventListener() {
 
 const onSearchHandler = () => {
     const searchValue = ui.getSearchValue();
-    data.fetchSearchingData(onSearchSuccess, searchValue);
+    const searchingDataPromise = data.fetchSearchingData(searchValue);
+    
+    searchingDataPromise.then( mappedShows => {
+        onSearchSuccess(mappedShows);
+    });
 }
 
 const onSearchSuccess = (listOfShows) => {
@@ -31,11 +25,11 @@ const onSearchSuccess = (listOfShows) => {
     $allListItems.on("click", onClickHandler);
 };
 
-const onSuccessHandler = (listOfShows) => {
+const homePageSuccess = (listOfShows) => {
     for (let i = 0; i < 50; i++) {
         const show = listOfShows[i];
-
-        ui.displayShow(show);
+        
+        ui.displayHomePage(show);
     }
     const $allCards = $(".card");
     $allCards.on("click", onClickHandler);
@@ -50,6 +44,26 @@ const moreInfoSuccess = (showInstance) => {
     ui.displayMoreInfo(showInstance);
 };
 
+const homePageInit = () => {
+
+    console.log("App initialized");
+    const homePagePromise = data.fetchHomePage();
+
+    homePagePromise.then( mappedShows => {
+        homePageSuccess(mappedShows);
+    });
+    setUpEventListener();
+}
+
+const moreInfoInit = () => {
+
+    const moreInfoPromise = data.fetchMoreInfo();
+
+    moreInfoPromise.then( showInstance => {
+        moreInfoSuccess(showInstance);
+    });
+    setUpEventListener();
+}
 
 export {
     homePageInit,
