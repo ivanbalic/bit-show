@@ -1,15 +1,15 @@
-.search-dropdown{
-    position: relative;
+.search-list {
+  position: relative;
 }
 
 .list-group {
-    width: 190px;
-    position: fixed;
-    right: 85px;
-    top: 45px;
-    z-index: 1;
+  width: 190px;
+  position: fixed;
+  right: 84px;
+  top: 45px;
+  z-index: 1;
 }
 
 .list-group:hover {
-    cursor: pointer;
+  cursor: pointer;
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Get More Info</title>
+    <title>Bit Show</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -17,19 +17,19 @@
       integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./css/info.css" />
+    <link rel="stylesheet" href="./css/about.css" />
   </head>
 
   <body>
     <header class="bg-dark">
-      <nav class="navbar navbar-dark container px-0">
+      <nav class="navbar  navbar-dark container px-0">
         <a href="." class="navbar-brand"><i class="fas fa-film"></i> BitShow</a>
         <ul class="navbar-nav mr-auto d-flex flex-row">
           <li class="nav-item mx-2">
-            <a class="nav-link" href="./index.html">Home</a>
+            <a class="nav-link" href=".">Home</a>
           </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="./about.html">About</a>
+          <li class="nav-item mx-2 active">
+            <a class="nav-link" href="#">About</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0 ml-auto">
@@ -45,7 +45,22 @@
         <ul class="list-group"></ul>
       </div>
     </header>
-    <main class="container my-6"></main>
+    <main class="container my-6">
+      <h1 class="mb-4">About Bit Show</h1>
+      <p>
+        Bit Show is a application which allows you to search for existing TV
+        Series, take a closer look on summary, info about seasons or actors.
+        Data provided by tvmaze.com. Fully responsive.
+      </p>
+      <h2 class="my-2">Stack</h2>
+      <ul class="stack">
+        <li>Language: HTML5, CSS3, JS(ES6+)</li>
+        <li>Library: Bootstrap</li>
+        <li>Package Manager: Yarn</li>
+        <li>Deployment: GitHub Pages</li>
+      </ul>
+    </main>
+
     <footer class="bg-dark">
       <p>Copyright &#169; Bit Student 2018</p>
     </footer>
@@ -66,9 +81,9 @@
       crossorigin="anonymous"
     ></script>
     <script type="module">
-      import { moreInfoInit } from "./js/app.js";
+      import { aboutPageInit } from "./js/app.js";
 
-      $(moreInfoInit);
+      $(aboutPageInit);
     </script>
   </body>
 </html>

@@ -1,13 +1,11 @@
 class Season {
-    constructor(premiereDate, endDate, number) {
-        this.premiereDate = premiereDate,
-            this.endDate = endDate,
-            this.number = number
-    }
-
-    getInfo() {
-        return `${this.premiereDate} - ${this.endDate}`;
-    }
+  constructor(premiereDate, endDate) {
+    this.premiereDate = premiereDate;
+    this.endDate = endDate;
+  }
+  getInfo = () => {
+    return `${this.premiereDate} - ${this.endDate}`;
+  };
 }
 
 export default Season;

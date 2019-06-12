@@ -1,71 +1,58 @@
 import * as data from "./data.js";
 import * as ui from "./ui.js";
 
-
-
 function setUpEventListener() {
-    const $searchInput = $("input");
+  const $searchInput = $("input");
 
-    $searchInput.on("input", onSearchHandler);
-    console.log("Event listeners set");
+  $searchInput.on("input", onSearchHandler);
+  console.log("Event listeners set");
 }
 
 const onSearchHandler = () => {
-    const searchValue = ui.getSearchValue();
-    const searchingDataPromise = data.fetchSearchingData(searchValue);
-    
-    searchingDataPromise.then( mappedShows => {
-        onSearchSuccess(mappedShows);
-    });
-}
-
-const onSearchSuccess = (listOfShows) => {
-    ui.displaySearch(listOfShows);
-    const $allListItems = $("li");
-    $allListItems.on("click", onClickHandler);
+  const searchValue = ui.getSearchValue();
+  data.fetchSearchingData(searchValue).then(mappedShows => {
+    onSearchSuccess(mappedShows);
+  });
 };
 
-const homePageSuccess = (listOfShows) => {
-    for (let i = 0; i < 50; i++) {
-        const show = listOfShows[i];
-        
-        ui.displayHomePage(show);
-    }
-    const $allCards = $(".card");
-    $allCards.on("click", onClickHandler);
+const onSearchSuccess = listOfShows => {
+  ui.displaySearch(listOfShows, onClickHandler);
 };
 
-const onClickHandler = (event) => {
-    localStorage.setItem('id', $(event.target).attr('data-id'));
-    window.location.href = "./getMoreInfo.html";
+const homePageSuccess = listOfShows => {
+  ui.displayHomePage(listOfShows, onClickHandler);
 };
 
-const moreInfoSuccess = (showInstance) => {
-    ui.displayMoreInfo(showInstance);
+const onClickHandler = event => {
+  localStorage.setItem("id", $(event.target).attr("data-id"));
+  window.location.href = "./getMoreInfo.html";
+};
+
+const moreInfoSuccess = showInstance => {
+  ui.displayMoreInfo(showInstance);
 };
 
 const homePageInit = () => {
+  console.log("App initialized");
+  const homePagePromise = data.fetchHomePage();
 
-    console.log("App initialized");
-    const homePagePromise = data.fetchHomePage();
-
-    homePagePromise.then( mappedShows => {
-        homePageSuccess(mappedShows);
-    });
-    setUpEventListener();
-}
+  homePagePromise.then(mappedShows => {
+    homePageSuccess(mappedShows);
+  });
+  setUpEventListener();
+};
 
 const moreInfoInit = () => {
+  const moreInfoPromise = data.fetchMoreInfo();
 
-    const moreInfoPromise = data.fetchMoreInfo();
-
-    moreInfoPromise.then( showInstance => {
-        moreInfoSuccess(showInstance);
-    });
-    setUpEventListener();
-}
-
-export {
-    homePageInit,
-    moreInfoInit
+  moreInfoPromise.then(showInstance => {
+    moreInfoSuccess(showInstance);
+  });
+  setUpEventListener();
 };
+
+const aboutPageInit = () => {
+  setUpEventListeners();
+};
+
+export { homePageInit, moreInfoInit, aboutPageInit };

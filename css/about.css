@@ -62,9 +62,8 @@ main {
   cursor: pointer;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 30px;
+.stack {
+  list-style: none;
 }
 
-/*# sourceMappingURL=info.css.map */
+/*# sourceMappingURL=about.css.map */
