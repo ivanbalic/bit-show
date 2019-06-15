@@ -21,8 +21,8 @@ const fetchHomePage = () => {
         return 0;
       });
       const mappedShows = parsedListOfShows.map(
-        ({ name, summary, image, id }) =>
-          new Show(name, summary, image, id, null, null)
+        ({ name, summary, image, id, rating, genres }) =>
+          new Show(name, summary, image, id, null, null, rating.average, genres)
       );
       return mappedShows.slice(0, 50);
     });
@@ -69,12 +69,20 @@ const fetchMoreInfo = () => {
     .then(parsedShow => {
       const { name, summary, image, id, _embedded } = parsedShow;
       const { seasons, cast } = _embedded;
+      console.log(cast);
 
       const mappedCasts = cast.map(
-        ({ person, character }) => new Cast(person.name, character.name)
+        ({ person, character }) =>
+          new Cast(
+            person.name,
+            character.name,
+            character.image,
+            new Date(person.birthday)
+          )
       );
       const mappedSeasons = seasons.map(
-        ({ premiereDate, endDate }) => new Season(premiereDate, endDate)
+        ({ premiereDate, endDate }) =>
+          new Season(new Date(premiereDate), new Date(endDate))
       );
       const show = new Show(
         name,

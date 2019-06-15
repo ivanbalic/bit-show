@@ -22,31 +22,55 @@
   </head>
 
   <body>
-    <header class="bg-dark">
-      <nav class="navbar navbar-dark container px-0">
-        <a href="." class="navbar-brand"><i class="fas fa-film"></i> BitShow</a>
-        <ul class="navbar-nav mr-auto d-flex flex-row">
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="./index.html">Home</a>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="./about.html">About</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0 ml-auto">
-          <input
-            class="form-control mr-sm-0"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-        </form>
+    <header>
+      <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container px-0">
+          <a href="/index.html" class="navbar-brand"
+            ><i class="fas fa-film"></i> BitShow</a
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./about.html">About</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </nav>
-      <div class="container search-list container">
+      <div class="container-fluid">
+        <div class="row">
+          <span class="searchIcon col-1 px-2 text-right">
+            <i class="fas fa-search"></i>
+          </span>
+          <input
+            type="text"
+            name="search"
+            autoComplete="off"
+            placeholder="Search"
+            class="searchBar col-11 px-2"
+          />
+        </div>
+      </div>
+      <div class="search-list px-0">
         <ul class="list-group"></ul>
       </div>
     </header>
-    <main class="container my-6"></main>
+    <main class="container"></main>
     <footer class="bg-dark">
       <p>Copyright &#169; Bit Student 2018</p>
     </footer>

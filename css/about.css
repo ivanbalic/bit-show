@@ -2,34 +2,25 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-main {
-  margin-top: 60px;
-}
-
-header {
-  background-color: #424242;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1;
-}
-
-.navbar-brand {
   color: white;
 }
 
-.navbar-brand:hover {
-  cursor: pointer;
-  color: gray;
+body {
+  background-image: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/vfPFP3W/movie-theater-film-reel-background-in-seamless-loop_xk6ivnb9__F0000.png);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+main {
+  margin-top: 30px;
 }
 
 footer {
   background-color: #424242;
   color: white;
   text-align: center;
-  padding: 25px 0;
+  padding: 10px 0;
 }
 
 p {
@@ -46,20 +37,56 @@ main {
   flex: 1 0 auto;
 }
 
+.searchBar {
+  margin: 0;
+  width: 96%;
+  opacity: 0.4;
+  border: none;
+  color: black;
+  padding: 10px 0;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.searchBar:focus {
+  outline: none;
+  opacity: 1;
+}
+
+.searchIcon {
+  width: 3%;
+  margin: 0;
+  padding: 10px 0;
+  color: white;
+  display: inline-block;
+  background-color: #e6b115;
+}
+
 .search-list {
   position: relative;
 }
 
 .list-group {
-  width: 190px;
-  position: fixed;
-  right: 84px;
-  top: 45px;
-  z-index: 1;
+  box-shadow: 1px 1px #5d6266, 2px 2px #9da2a5, 3px 3px #abb2b4;
+  position: absolute;
+  width: 100%;
+  z-index: 1040;
 }
 
-.list-group:hover {
-  cursor: pointer;
+.list-group-item {
+  color: black;
+  border: none;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.list-group-item:hover {
+  cursor: pointer !important;
+  -webkit-transform: translateX(-3px);
+  transform: translateX(-3px);
+  text-decoration: underline;
+}
+
+.list-group-item:nth-of-type(even) {
+  background-color: #f5f5f5;
 }
 
 .stack {

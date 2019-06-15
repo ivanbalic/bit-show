@@ -3,9 +3,17 @@ class Season {
     this.premiereDate = premiereDate;
     this.endDate = endDate;
   }
-  getInfo = () => {
-    return `${this.premiereDate} - ${this.endDate}`;
-  };
+  getInfo() {
+    return `${this.premiereDate.toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "short",
+      day: "numeric"
+    })} - ${this.endDate.toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "short",
+      day: "numeric"
+    })}`;
+  }
 }
 
 export default Season;

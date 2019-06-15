@@ -51,8 +51,4 @@ const moreInfoInit = () => {
   setUpEventListener();
 };
 
-const aboutPageInit = () => {
-  setUpEventListeners();
-};
-
-export { homePageInit, moreInfoInit, aboutPageInit };
+export { homePageInit, moreInfoInit };

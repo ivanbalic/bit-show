@@ -1,11 +1,17 @@
 class Cast {
-  constructor(name, role) {
+  constructor(name, role, image, dateOfBirth) {
     this.name = name;
     this.role = role;
+    this.image = image;
+    this.dateOfBirth = dateOfBirth;
   }
-  getInfo = () => {
-    return `${this.name} as ${this.role}`;
-  };
+  getDateOfBirth() {
+    return this.dateOfBirth.toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "short",
+      day: "numeric"
+    });
+  }
 }
 
 export default Cast;

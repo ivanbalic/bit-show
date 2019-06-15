@@ -9,6 +9,6 @@ Live Preview: [BIT Show](https://ivanbalic.github.io/bit-show/)
 # Stack
 
     -   Language: HTML5, CSS3, JS(ES6+)
-    -   Library: Bootstrap
+    -   Library: jQuery, Bootstrap
     -   Package Manager: Yarn
     -   Deployment: GitHub Pages

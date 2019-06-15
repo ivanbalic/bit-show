@@ -1,6 +1,6 @@
 @import "./partials/reset";
-@import "./partials/header";
 @import "./partials/footer";
+@import "./partials/search-bar";
 @import "./partials/search-list";
 
 h1 {
@@ -8,8 +8,7 @@ h1 {
 }
 
 .card {
-  width: 18rem;
-  margin: 20px 0;
+  background-color: transparent;
 }
 
 .card:hover {

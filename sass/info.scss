@@ -1,9 +1,14 @@
+@import "./partials/hr";
 @import "./partials/reset";
-@import "./partials/header";
 @import "./partials/footer";
+@import "./partials/search-bar";
 @import "./partials/search-list";
 
 h1 {
   text-align: center;
   margin-bottom: 30px;
+}
+
+.border-image {
+  background-image: url(https://previews.123rf.com/images/flas100/flas1001402/flas100140200044/25911899-old-grunge-film-strip-background.jpg); //za okivir na details page
 }

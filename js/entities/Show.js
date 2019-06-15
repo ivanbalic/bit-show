@@ -1,15 +1,17 @@
 class Show {
-  constructor(title, details, images, id, seasons, casts) {
-    this.title = title;
-    this.details = details;
-    this.images = images;
+  constructor(title, details, images, id, seasons, casts, rating, genres) {
     this.id = id;
-    this.seasons = seasons;
     this.casts = casts;
+    this.title = title;
+    this.genres = genres;
+    this.images = images;
+    this.rating = rating;
+    this.details = details;
+    this.seasons = seasons;
   }
-  getNumberOfSeasons = () => {
+  getNumberOfSeasons() {
     return this.seasons.length;
-  };
+  }
 }
 
 export default Show;
