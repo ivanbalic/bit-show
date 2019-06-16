@@ -78,7 +78,7 @@ const createCastItem = casts => {
       </div>`;
     });
   } else {
-    castsHtml += `<p>No info</p>`;
+    castsHtml += `<p class="col-12">No info</p>`;
   }
   return (castsHtml += "</div>");
 };
