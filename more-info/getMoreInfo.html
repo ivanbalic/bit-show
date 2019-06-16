@@ -5,7 +5,7 @@
     <link rel="shortcut icon" href="icon/favicon.ico" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Bit Show</title>
+    <title>Get More Info</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -18,7 +18,7 @@
       integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./css/about.css" />
+    <link rel="stylesheet" href="../css/info.css" />
   </head>
 
   <body>
@@ -45,36 +45,32 @@
               <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
               </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="./about.html">About</a>
+              <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
+      <div class="container-fluid">
+        <div class="row">
+          <span class="searchIcon col-1 px-2 text-right">
+            <i class="fas fa-search"></i>
+          </span>
+          <input
+            type="text"
+            name="search"
+            autoComplete="off"
+            placeholder="Search"
+            class="searchBar col-11 px-2"
+          />
+        </div>
+      </div>
+      <div class="search-list px-0">
+        <ul class="list-group"></ul>
+      </div>
     </header>
-    <main class="container my-6">
-      <h1 class="mb-4">About Bit Show</h1>
-      <p>
-        Bit Show is a application which allows you to search for existing TV
-        Series, take a closer look on summary, info about seasons or actors.
-        Data provided by tvmaze.com. Fully responsive.
-      </p>
-      <p class="my-3">
-        Source code on
-        <a href="https://github.com/ivanbalic/bit-show" target="blank">
-          <i class="fab fa-github"></i> GitHub
-        </a>
-      </p>
-      <h2 class="my-2">Stack</h2>
-      <ul class="stack">
-        <li>Language: HTML5, CSS3, JS(ES6+)</li>
-        <li>Library: jQuery, Bootstrap</li>
-        <li>Package Manager: Yarn</li>
-        <li>Deployment: GitHub Pages</li>
-      </ul>
-    </main>
-
+    <main class="container"></main>
     <footer class="bg-dark">
       <p>Copyright &#169; Bit Student 2018</p>
     </footer>
@@ -94,5 +90,10 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script type="module">
+      import { moreInfoInit } from "./js/app.js";
+
+      $(moreInfoInit);
+    </script>
   </body>
 </html>
