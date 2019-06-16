@@ -25,7 +25,7 @@ const homePageSuccess = listOfShows => {
 
 const onClickHandler = event => {
   localStorage.setItem("id", $(event.target).attr("data-id"));
-  window.location.href = "./more-info";
+  window.location.href = "./more-info/moreInfo.html";
 };
 
 const moreInfoSuccess = showInstance => {
