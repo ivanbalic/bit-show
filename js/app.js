@@ -21,8 +21,8 @@ const handleShowClick = event => {
     localStorage.setItem("id", showId);
     const currentLocation = window.location.href;
 
-    if (!currentLocation.includes("/more-info/moreInfo.html")) {
-      window.location.href = "./more-info/moreInfo.html";
+    if (!currentLocation.includes("/pages/moreInfo.html")) {
+      window.location.href = "./pages/moreInfo.html";
     } else {
       window.location.reload();
     }
