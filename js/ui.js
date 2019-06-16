@@ -34,7 +34,10 @@ const createCastItem = casts => {
   return castsHtml;
 };
 
-const getSearchValue = () => $searchInput.val();
+const getSearchValue = () => {
+  console.log($searchInput.val());
+  return $searchInput.val();
+};
 
 const displayHomePage = (listOfShows, handleClick) => {
   const $gallery = $(".gallery");
