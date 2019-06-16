@@ -1,7 +1,12 @@
 import Cast from "./entities/Cast.js";
-import Season from "./entities/Season.js";
 import Show from "./entities/Show.js";
-import { SHOWS_ENDPOINT, SEARCH_SHOWS_ENDPOINT } from "./shared/endpoints.js";
+import Season from "./entities/Season.js";
+import Episode from "./entities/Episode.js";
+import {
+  SHOWS_ENDPOINT,
+  SEARCH_SHOWS_ENDPOINT,
+  SEASONS_ENDPOINT
+} from "./shared/endpoints.js";
 
 const fetchHomePage = () => {
   return fetch(SHOWS_ENDPOINT)
@@ -58,8 +63,7 @@ const fetchSearchingData = searchInput => {
     });
 };
 
-const fetchMoreInfo = () => {
-  const id = localStorage.getItem("id");
+const fetchMoreInfo = id => {
   const EMBED_ENDPOINT = `${SHOWS_ENDPOINT}/${id}?embed[]=seasons&embed[]=cast`;
 
   return fetch(EMBED_ENDPOINT)
@@ -69,7 +73,6 @@ const fetchMoreInfo = () => {
     .then(parsedShow => {
       const { name, summary, image, id, _embedded } = parsedShow;
       const { seasons, cast } = _embedded;
-      console.log(cast);
 
       const mappedCasts = cast.map(
         ({ person, character }) =>
@@ -81,8 +84,14 @@ const fetchMoreInfo = () => {
           )
       );
       const mappedSeasons = seasons.map(
-        ({ premiereDate, endDate }) =>
-          new Season(new Date(premiereDate), new Date(endDate))
+        ({ id, premiereDate, endDate, number, episodeOrder }) =>
+          new Season(
+            id,
+            new Date(premiereDate),
+            new Date(endDate),
+            number,
+            episodeOrder
+          )
       );
       const show = new Show(
         name,
@@ -96,4 +105,17 @@ const fetchMoreInfo = () => {
     });
 };
 
-export { fetchHomePage, fetchSearchingData, fetchMoreInfo };
+const fetchEpisodes = seasonId => {
+  const EPISODES_BY_SEASON_ENDPOINT = `${SEASONS_ENDPOINT}/${seasonId}/episodes`;
+  return fetch(EPISODES_BY_SEASON_ENDPOINT)
+    .then(listOfEpisodes => {
+      return listOfEpisodes.json();
+    })
+    .then(listOfEpisodes => {
+      return listOfEpisodes.map(
+        ({ name, number, summary }) => new Episode(name, number, summary)
+      );
+    });
+};
+
+export { fetchHomePage, fetchSearchingData, fetchMoreInfo, fetchEpisodes };

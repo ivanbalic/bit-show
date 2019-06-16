@@ -15,21 +15,41 @@ const onSearchHandler = () => {
   });
 };
 
+const handleShowClick = event => {
+  const showId = $(event.target).attr("data-id");
+  if (showId) {
+    localStorage.setItem("id", showId);
+    const currentLocation = window.location.href;
+
+    if (!currentLocation.includes("/more-info/moreInfo.html")) {
+      window.location.href = "./more-info/moreInfo.html";
+    } else {
+      window.location.reload();
+    }
+  }
+};
+
+const handleSeasonClick = ({ target }) => {
+  const seasonId = $(target).attr("data-id");
+  data.fetchEpisodes(seasonId).then(listOfEpisodes => {
+    ui.displayEpisodes(listOfEpisodes, seasonId);
+    $(target).off("click", handleSeasonClick);
+  });
+};
+
 const onSearchSuccess = listOfShows => {
-  ui.displaySearch(listOfShows, onClickHandler);
+  ui.displaySearch(listOfShows);
+  $(".list-group-item").on("click", handleShowClick);
 };
 
 const homePageSuccess = listOfShows => {
-  ui.displayHomePage(listOfShows, onClickHandler);
-};
-
-const onClickHandler = event => {
-  localStorage.setItem("id", $(event.target).attr("data-id"));
-  window.location.href = "./more-info/moreInfo.html";
+  ui.displayHomePage(listOfShows);
+  $(".card").on("click", handleShowClick);
 };
 
 const moreInfoSuccess = showInstance => {
   ui.displayMoreInfo(showInstance);
+  $(".season-btn").on("click", handleSeasonClick);
 };
 
 const homePageInit = () => {
@@ -43,7 +63,8 @@ const homePageInit = () => {
 };
 
 const moreInfoInit = () => {
-  const moreInfoPromise = data.fetchMoreInfo();
+  const id = localStorage.getItem("id");
+  const moreInfoPromise = data.fetchMoreInfo(id);
 
   moreInfoPromise.then(showInstance => {
     moreInfoSuccess(showInstance);

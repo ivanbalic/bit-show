@@ -1,7 +1,10 @@
 class Season {
-  constructor(premiereDate, endDate) {
-    this.premiereDate = premiereDate;
+  constructor(id, premiereDate, endDate, number, numberOfEpisodes) {
+    this.id = id;
+    this.number = number;
     this.endDate = endDate;
+    this.premiereDate = premiereDate;
+    this.numberOfEpisodes = numberOfEpisodes;
   }
   getInfo() {
     return `${this.premiereDate.toLocaleDateString("en-GB", {

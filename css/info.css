@@ -1,7 +1,13 @@
-hr {
+.hr-white {
   border: 0;
   height: 1px;
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+}
+
+.hr-black {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
 * {
@@ -102,6 +108,12 @@ h1 {
 
 .border-image {
   background-image: url(https://previews.123rf.com/images/flas100/flas1001402/flas100140200044/25911899-old-grunge-film-strip-background.jpg);
+}
+
+.season-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-bottom: 1px solid gray !important;
 }
 
 /*# sourceMappingURL=info.css.map */
